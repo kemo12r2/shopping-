@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="إدارة عربة التسوق الخاصة بك وإكمال عملية الشراء بسهولة.">
+    <meta name="keywords" content="عربة التسوق, شراء, تجارة إلكترونية">
+    <meta name="author" content="E-Commerce Team">
+    <link rel="stylesheet" href="./css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/all.min.css" integrity="sha384-NvKbDTp6S+UglaMsuz1zOCZKwJesmf1z78+T+tg5rQ+kURhEjgT4G6g3Q0XjO3mJ" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <title>عربة التسوق - متجر التجارة الإلكترونية</title>
+    <link rel="shortcut icon" href="img/images (1).jpg" type="image/x-icon">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "عربة التسوق",
+        "url": "https://example.com/cart.html"
+    }
+    </script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-primary" role="navigation" aria-label="التنقل الرئيسي">
+        <div class="container">
+            <a class="navbar-brand" href="index.html" aria-label="الصفحة الرئيسية">
+                <img src="img/images.jpg" class="rounded-5" width="50" height="50" alt="شعار المتجر" loading="lazy">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="تبديل التنقل">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="index.html">الرئيسية</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">من نحن</a></li>
+                    <li class="nav-item"><a class="nav-link" href="products.html">المنتجات</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">المزيد</a>
+                        <ul class="dropdown-menu text-center">
+                            <li><a class="dropdown-item" href="contact.html">اتصل بنا</a></li>
+                            <li><a class="dropdown-item" href="cart.html">عربة التسوق</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="login.html">تسجيل الدخول</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="d-flex ms-3 position-relative" role="search" aria-label="بحث المنتجات">
+                    <input class="form-control me-2" type="search" id="searchInput" placeholder="ابحث عن منتج" aria-label="بحث" autocomplete="off">
+                    <ul class="dropdown-menu search-suggestions" id="searchSuggestions"></ul>
+                </form>
+                <a class="nav-link" href="cart.html" aria-label="عربة التسوق">
+                    <div class="text-white"><i class="fa-solid fa-cart-shopping"></i> <span id="cartCount" class="badge bg-danger rounded-circle">0</span></div>
+                    <span>السلة</span>
+                </a>
+                <div class="nav-item dropdown ms-3">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="userProfile" aria-label="حساب المستخدم">
+                        <i class="fa-solid fa-user"></i> <span id="usernameDisplay">حسابي</span>
+                    </a>
+                    <ul class="dropdown-menu text-center">
+                        <li><a class="dropdown-item" href="login.html" id="logoutLink">تسجيل الخروج</a></li>
+                    </ul>
+                </div>
+                <button class="btn btn-outline-light ms-2" id="themeToggle" aria-label="تبديل الوضع">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Toast Notification -->
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div id="actionToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">إشعار</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="إغلاق"></button>
+            </div>
+            <div class="toast-body"></div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="d-none position-fixed top-50 start-50 translate-middle">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">جارٍ التحميل...</span>
+        </div>
+    </div>
+
+    <!-- Cart Section -->
+    <section id="cart" class="mt-5 pt-5">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="text-header pb-2">عربة التسوق</h2>
+            </div>
+            <div id="cartItems" class="mt-4"></div>
+            <hr>
+            <h5 class="text-center">الإجمالي: <span id="cartTotal">0</span> جنيه</h5>
+            <hr>
+            <div id="checkoutForm" class="mt-4" style="display: none;">
+                <h4 class="text-center">إكمال الشراء</h4>
+                <form id="checkoutDetails" class="was-validated">
+                    <div class="mb-3">
+                        <label for="fullName" class="form-label">الاسم الكامل</label>
+                        <input type="text" class="form-control" id="fullName" required placeholder="أدخل اسمك الكامل" pattern="[ء-ي\s]{2,}">
+                        <div class="invalid-feedback">يرجى إدخال اسم صالح (حرفين على الأقل).</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">العنوان</label>
+                        <input type="text" class="form-control" id="address" required placeholder="أدخل عنوانك">
+                        <div class="invalid-feedback">يرجى إدخال عنوان صالح.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">رقم الهاتف</label>
+                        <input type="tel" class="form-control" id="phone" required placeholder="أدخل رقم هاتفك" pattern="[0-9]{11}">
+                        <div class="invalid-feedback">يرجى إدخال رقم هاتف صالح (11 رقم).</div>
+                    </div>
+                    <input type="hidden" name="csrf_token" id="csrfTokenCheckout">
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary gradient-btn">تأكيد الطلب</button>
+                    </div>
+                </form>
+            </div>
+            <div class="text-center">
+                <button class="btn btn-dark gradient-btn" id="checkoutBtn">إكمال الشراء</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-white pt-5 bg-primary" role="contentinfo">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h4>عن الفريق</h4>
+                    <p>نقدم تجربة تسوق إلكترونية فريدة، سهلة الاستخدام، مع منتجات متنوعة تلبي جميع احتياجاتك.</p>
+                </div>
+                <div class="col-md-4">
+                    <h4>تواصل معنا</h4>
+                    <p class="pt-3"><i class="fa-solid fa-house me-2"></i> مصر، جامعة المنصورة</p>
+                    <p><i class="fa-solid fa-envelope me-2"></i> kareem@gmail.com</p>
+                    <p><i class="fa-solid fa-phone me-2"></i> 0123456789</p>
+                    <p><i class="fa-solid fa-print me-2"></i> 01129370303</p>
+                </div>
+                <div class="col-md-4">
+                    <h4>تابعنا</h4>
+                    <a href="#" class="text-white me-2 social-icon" aria-label="فيسبوك"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" class="text-white me-2 social-icon" aria-label="تويتر"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" class="text-white me-2 social-icon" aria-label="إنستغرام"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="text-white social-icon" aria-label="لينكدإن"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <hr class="bg-white">
+            <p class="text-center mb-0">© 2025 متجر التجارة الإلكترونية. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="./js/jquery-3.7.1.js" integrity="sha384-1H217gwSVyLSIfaLxHbE7dRb3v4mYCKbpQvzx0ceg67OgJPJo5aN8M0gU2zGpn6o" crossorigin="anonymous" defer></script>
+    <script src="./js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
+    <script src="js/script.js" defer></script>
+</body>
+</html>

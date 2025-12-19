@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:slnt,wght@11,200..1000&display=swap');
+
+*{
+    font-family: "Cairo", sans-serif;
+}
+
+/*nav*/
+.navbar{
+    background-color: #01708f !important;
+}
+/*carousel*/
+.carousel-item img{
+    height: 100vh;
+}
+
+.carousel-caption{
+   background-color: rgba(151,194,224,.4) ;
+   border-radius: 20px;
+   bottom: 8rem;
+}
+.carousel-caption:hover{
+    background-color: rgba(48,97,232,.4) ;
+    transition: ease all .7s;
+ }
+
+.carousel-caption h2{
+ font-size: 45px;
+ margin-bottom:30px ;
+}
+.carousel-caption p{
+ font-size: 20px;
+}
+
+.carousel-indicators button{
+    height: 20px !important;
+width: 20px !important;
+border-radius: 50% !important;
+background-color:  #01708f !important;
+}
+.carousel-indicators button:hover{
+    background-color: crimson !important;
+
+}
+
+
+
+/*icon*/
+.myicon{
+    color:  #01708f;
+    font-size:30px ;
+}
+ .btn-dark:hover{
+ background-color: crimson !important;
+ border-radius: 20px;
+ transition: 1s ease all;
+ }
+/* offcan*/
+.offcan-img{
+  width: 250px !important ;
+  height: 300px !important;
+}
+.offcan-img:hover{
+  transform: skew(-5deg);
+  transition: ease all 1s;
+}
+.offcanv-price{
+    color:  #01708f;
+    font-weight: bold;
+}
+.offcan-header{
+color: crimson !important;
+}
+/*section*/
+.text-header{
+    border-bottom: crimson solid 5px;
+}
+.card{
+  overflow: hidden;
+}
+.card img{
+   height: 300px;
+   width: 100%;
+}
+
+.card img:hover{
+transform:scale(1,1) ;
+transition: all ease 1s;
+}
+ 
+
+
+
+
+.btn-primary{
+    background-color:#01708f ;
+}
+.btn-primary:hover{
+    background-color:crimson ;
+    border-radius: 20px;
+    transition: 1s ease all;
+}
+.bluecmon{
+    color: #01708f !important;
+}
+.bluecmon:hover{
+    color: crimson !important;
+    transition: 1s ease all;
+    cursor: pointer;
+}
+
+/* contect */
+.contact{
+    height: 60vh;
+    background: url('../img/images\ \(3\).jpg');
+    background-size: cover;
+    background-attachment: fixed;
+}
+.inputcontect{
+    border-radius: 0px !important;
+}
+.contact button{
+    width: 150px;
+    border-radius: 20px 0px 0px 20px !important;
+}
+.blue{
+    color: #01708f !important;
+}
+/* contract */
+.contract h5{
+    color: crimson !important;
+}
+.accordion button{
+    background-color:#01708f !important  ;
+    color: white !important;
+    text-align: center !important;
+    display: flex;
+    justify-content: center;
+}
+.accordion button::after{
+ display: none;
+}
+
+/* footer */
+footer{
+    background-color: #01708f;
+}
+
+/* sevivces */
+#services{
+    margin-top: 150px !important;
+}
+
+
+
+
+
+
+
+/* scrooolbar */
+/* width */
+::-webkit-scrollbar {
+    width: 15px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background:#01708f;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: crimson;
+  }
